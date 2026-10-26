@@ -203,6 +203,7 @@
   /* ── 스타일 ── */
   var CSS = [
     '.jm, .jm *, .jm-mega, .jm-mega *, .jm-drawer, .jm-drawer *, .jm-dim { box-sizing:border-box; margin:0; padding:0; }',
+    '.jm, .jm-bar { border:0 !important; outline:0 !important; }',
     '.jm, .jm-mega, .jm-drawer { --ink:#0a0a0a; --paper:#fff; --band:#f6f6f6; --rule:#e6e6e6; --soft:#6b6b6b; --ease:cubic-bezier(.25,1,.5,1);',
     '  font-family:"Pretendard","Apple SD Gothic Neo",sans-serif; -webkit-font-smoothing:antialiased; word-break:keep-all; }',
     '.jm a, .jm-mega a, .jm-drawer a { color:inherit; text-decoration:none; }',
@@ -214,12 +215,14 @@
     '.jm-transparent { position:absolute; top:0; left:0; right:0; }',
     '.jm.is-fixed { position:fixed; top:0; left:0; right:0; }',
     /* 기존 히어로 위에 띄울 때: 밝은 사진에서도 흰 메뉴가 읽히도록 상단만 살짝 어둡게 */
-    '.jm-overlay:not(.is-stuck):not(.is-on) .jm-bar { background-image:linear-gradient(to bottom, rgba(0,0,0,.32), rgba(0,0,0,0)); background-repeat:no-repeat; background-origin:border-box; }',
-    '.jm-bar { height:var(--hh); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 16px;',
-    '  color:#fff; border-bottom:1px solid transparent; transition:background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }',
+    '.jm-bar::before { content:""; position:absolute; left:0; right:0; top:0; height:calc(100% + 30px); z-index:-1; pointer-events:none;',
+    '  background:linear-gradient(to bottom, rgba(0,0,0,.32) 0%, rgba(0,0,0,.12) 60%, rgba(0,0,0,0) 100%); opacity:0; transition:opacity .35s var(--ease); }',
+    '.jm-overlay:not(.is-stuck):not(.is-on) .jm-bar::before { opacity:1; }',
+    '.jm-bar { position:relative; z-index:0; height:var(--hh); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 16px;',
+    '  color:#fff; border:0; box-shadow:none; transition:background-color .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease); }',
     '@media (min-width:640px){ .jm-bar { padding:0 28px; } }',
     '@media (min-width:' + BP + 'px){ .jm-bar { padding:0 40px; } }',
-    '.jm-solid .jm-bar, .jm.is-on .jm-bar, .jm.is-stuck .jm-bar { background:var(--paper); color:var(--ink); border-bottom-color:var(--rule); }',
+    '.jm-solid .jm-bar, .jm.is-on .jm-bar, .jm.is-stuck .jm-bar { background:var(--paper); color:var(--ink); box-shadow:inset 0 -1px 0 var(--rule); }',
     '.jm-left { display:flex; align-items:center; gap:18px; min-width:0; }',
     '.jm-right { display:flex; align-items:center; justify-content:flex-end; gap:20px; }',
     '.jm-logo { display:flex; flex-direction:column; align-items:center; line-height:1; }',
@@ -251,7 +254,8 @@
     '.jm-burger i:nth-child(1){ top:1px; } .jm-burger i:nth-child(2){ top:7px; } .jm-burger i:nth-child(3){ top:13px; }',
     /* 메가 메뉴: 화면 기준(fixed)으로 띄워 아임웹 섹션에 잘리지 않게 */
     '.jm-mega { position:fixed; left:0; right:0; top:84px; z-index:8999; height:0; overflow:hidden; background:var(--paper); color:var(--ink);',
-    '  transition:height .55s var(--ease); }',
+    '  border:0; visibility:hidden; transition:height .55s var(--ease), visibility 0s .55s; }',
+    '.jm-mega.is-open { visibility:visible; transition:height .55s var(--ease), visibility 0s; }',
     '@media (max-width:' + (BP - 1) + 'px){ .jm-mega { display:none; } }',
     '.jm-pane { position:absolute; top:0; left:0; right:0; opacity:0; visibility:hidden; transform:translateY(-8px);',
     '  transition:opacity .3s ease, transform .45s var(--ease), visibility 0s .3s; }',
@@ -457,7 +461,8 @@
       document.head.appendChild(h);
     }
 
-    var head = document.createElement('header');
+    var head = document.createElement('div'); /* header 태그 대신 div (사이트 CSS 영향 차단) */
+    head.setAttribute('role', 'banner');
     head.className = 'jm jm-' + theme;
     head.innerHTML = barHTML(root.getAttribute('data-active'));
     root.appendChild(head);
@@ -487,7 +492,7 @@
         Object.keys(panes).forEach(function (k) { panes[k].classList.toggle('is-on', k === key); });
         current = key;
       }
-      head.classList.add('is-on'); dim.classList.add('is-on');
+      head.classList.add('is-on'); dim.classList.add('is-on'); mega.classList.add('is-open');
       mega.setAttribute('aria-hidden', 'false');
       mega.style.height = pane.offsetHeight + 'px';
     }
@@ -495,7 +500,7 @@
       clearTimeout(closeT);
       if (!current) return;
       mega.style.height = '0px';
-      head.classList.remove('is-on'); dim.classList.remove('is-on');
+      head.classList.remove('is-on'); dim.classList.remove('is-on'); mega.classList.remove('is-open');
       mega.setAttribute('aria-hidden', 'true');
       links.forEach(function (l) { l.classList.remove('is-on'); });
       current = null;
