@@ -16,6 +16,7 @@
    - data-hide-imweb-header="true"  → 아임웹 기본 헤더(#doz_header_wrap)를 숨김
    - data-active="dress"            → 현재 페이지 메뉴에 밑줄 고정 (아래 key 값)
    - data-sticky="true" | "false"   → 스크롤 시 상단 고정 (transparent는 기본 고정, solid는 기본 고정 안 함)
+   - data-overlay="true"            → 기존 히어로는 그대로 두고 그 위에 메뉴만 띄움 (data-theme="transparent"와 함께)
 
    [메뉴 수정] 아래 MENU 목록만 고치고 깃허브에 올리면 모든 페이지에 반영됩니다.
    jsDelivr 캐시 때문에 바로 안 바뀌면 이 주소에 한 번 접속하세요:
@@ -212,6 +213,8 @@
     '@media (min-width:' + BP + 'px){ .jm { --hh:84px; } }',
     '.jm-transparent { position:absolute; top:0; left:0; right:0; }',
     '.jm.is-fixed { position:fixed; top:0; left:0; right:0; }',
+    /* 기존 히어로 위에 띄울 때: 밝은 사진에서도 흰 메뉴가 읽히도록 상단만 살짝 어둡게 */
+    '.jm-overlay:not(.is-stuck):not(.is-on) .jm-bar { background-image:linear-gradient(to bottom, rgba(0,0,0,.32), rgba(0,0,0,0)); }',
     '.jm-bar { height:var(--hh); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 16px;',
     '  color:#fff; border-bottom:1px solid transparent; transition:background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }',
     '@media (min-width:640px){ .jm-bar { padding:0 28px; } }',
@@ -521,6 +524,20 @@
     /* 스크롤 고정: 조금만 내려도 흰 배경 + 검정 로고로 바뀌며 상단에 붙음 */
     var stickyAttr = root.getAttribute('data-sticky');
     var sticky = stickyAttr ? stickyAttr === 'true' : theme === 'transparent';
+    /* data-overlay="true": 기존 히어로 위에 처음부터 화면 상단에 띄움 (히어로 코드 수정 없이 메뉴만 적용할 때) */
+    if (root.getAttribute('data-overlay') === 'true') {
+      var WHITE_AT0 = 40, ticking3 = false;
+      document.body.appendChild(head);
+      head.classList.add('is-fixed', 'jm-overlay');
+      var stick0 = function () {
+        ticking3 = false;
+        var y = window.pageYOffset || document.documentElement.scrollTop;
+        head.classList.toggle('is-stuck', y > WHITE_AT0);
+      };
+      window.addEventListener('scroll', function () { if (!ticking3) { ticking3 = true; requestAnimationFrame(stick0); } }, { passive: true });
+      stick0();
+      sticky = false;
+    }
     if (sticky) {
       var fixed = false, ticking2 = false;
       var WHITE_AT = 40; /* 이만큼(px) 내리면 흰색으로 */
