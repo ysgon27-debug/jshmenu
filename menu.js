@@ -5,11 +5,11 @@
 
    ① 메인처럼 사진 위에 투명하게 뜨는 페이지 (히어로 안에 넣기)
       <div id="jsh-menu" data-theme="transparent"></div>
-      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js"></script>
+      <script src="https://ysgon27-debug.github.io/jshmenu/menu.js"></script>
 
    ② 일반 서브 페이지 (처음부터 흰색 헤더)
       <div id="jsh-menu" data-theme="solid" data-hide-imweb-header="true"></div>
-      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js"></script>
+      <script src="https://ysgon27-debug.github.io/jshmenu/menu.js"></script>
 
    옵션
    - data-theme="transparent" | "solid"
@@ -18,9 +18,9 @@
    - data-sticky="true" | "false"   → 스크롤 시 상단 고정 (transparent는 기본 고정, solid는 기본 고정 안 함)
    - data-overlay="true"            → 기존 히어로는 그대로 두고 그 위에 메뉴만 띄움 (data-theme="transparent"와 함께)
 
-   [메뉴 수정] 아래 MENU 목록만 고치고 깃허브에 올리면 모든 페이지에 반영됩니다.
-   jsDelivr 캐시 때문에 바로 안 바뀌면 이 주소에 한 번 접속하세요:
-   https://purge.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js
+   [메뉴 수정] 아래 MENU 목록만 고치고 깃허브(jshmenu)에 올리면 모든 페이지에 반영됩니다.
+   GitHub Pages로 불러오므로 purge는 필요 없고, 올린 뒤 몇 분 안에 자동 반영됩니다.
+   (사진·로고는 jsh 저장소에서 jsDelivr로 불러옵니다)
 ============================================================ */
 (function () {
   if (window.__jshMenu) { window.__jshMenu.mountAll(); return; }
