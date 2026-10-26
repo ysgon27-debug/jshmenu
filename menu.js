@@ -214,7 +214,7 @@
     '.jm-transparent { position:absolute; top:0; left:0; right:0; }',
     '.jm.is-fixed { position:fixed; top:0; left:0; right:0; }',
     /* 기존 히어로 위에 띄울 때: 밝은 사진에서도 흰 메뉴가 읽히도록 상단만 살짝 어둡게 */
-    '.jm-overlay:not(.is-stuck):not(.is-on) .jm-bar { background-image:linear-gradient(to bottom, rgba(0,0,0,.32), rgba(0,0,0,0)); }',
+    '.jm-overlay:not(.is-stuck):not(.is-on) .jm-bar { background-image:linear-gradient(to bottom, rgba(0,0,0,.32), rgba(0,0,0,0)); background-repeat:no-repeat; background-origin:border-box; }',
     '.jm-bar { height:var(--hh); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 16px;',
     '  color:#fff; border-bottom:1px solid transparent; transition:background-color .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }',
     '@media (min-width:640px){ .jm-bar { padding:0 28px; } }',
