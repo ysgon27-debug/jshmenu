@@ -5,11 +5,11 @@
 
    ① 메인처럼 사진 위에 투명하게 뜨는 페이지 (히어로 안에 넣기)
       <div id="jsh-menu" data-theme="transparent"></div>
-      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jsh@main/menu.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js"></script>
 
    ② 일반 서브 페이지 (처음부터 흰색 헤더)
       <div id="jsh-menu" data-theme="solid" data-hide-imweb-header="true"></div>
-      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jsh@main/menu.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js"></script>
 
    옵션
    - data-theme="transparent" | "solid"
@@ -19,7 +19,7 @@
 
    [메뉴 수정] 아래 MENU 목록만 고치고 깃허브에 올리면 모든 페이지에 반영됩니다.
    jsDelivr 캐시 때문에 바로 안 바뀌면 이 주소에 한 번 접속하세요:
-   https://purge.jsdelivr.net/gh/ysgon27-debug/jsh@main/menu.js
+   https://purge.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu.js
 ============================================================ */
 (function () {
   if (window.__jshMenu) { window.__jshMenu.mountAll(); return; }
@@ -242,10 +242,10 @@
     '.jm-icon svg { width:18px; height:18px; }',
     '.jm-book { font-size:13px; white-space:nowrap; padding-bottom:2px; border-bottom:1px solid currentColor; }',
     '.jm-book-l { display:none; } @media (min-width:640px){ .jm-book-s { display:none; } .jm-book-l { display:inline; } }',
-    '.jm-burger { position:relative; width:22px; height:14px; display:block; }',
+    '.jm-burger { position:relative; width:22px; height:16px; display:block; }',
     '@media (min-width:' + BP + 'px){ .jm-burger { display:none; } }',
-    '.jm-burger i { position:absolute; left:0; right:0; height:1.5px; background:currentColor; }',
-    '.jm-burger i:nth-child(1){ top:2px; } .jm-burger i:nth-child(2){ bottom:2px; }',
+    '.jm-burger i { position:absolute; left:0; right:0; height:2px; background:currentColor; }',
+    '.jm-burger i:nth-child(1){ top:1px; } .jm-burger i:nth-child(2){ top:7px; } .jm-burger i:nth-child(3){ top:13px; }',
     /* 메가 메뉴: 화면 기준(fixed)으로 띄워 아임웹 섹션에 잘리지 않게 */
     '.jm-mega { position:fixed; left:0; right:0; top:84px; z-index:8999; height:0; overflow:hidden; background:var(--paper); color:var(--ink);',
     '  transition:height .55s var(--ease); }',
@@ -367,7 +367,7 @@
         (m.key === active ? ' class="is-current"' : '') + '>' + esc(m.label) + '</a>';
     }).join('');
     return '<div class="jm-bar">' +
-      '<div class="jm-left"><button class="jm-burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i></button>' +
+      '<div class="jm-left"><button class="jm-burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i><i></i></button>' +
       '<nav class="jm-nav" aria-label="주 메뉴">' + nav + '</nav></div>' +
       logo() +
       '<div class="jm-right">' +
