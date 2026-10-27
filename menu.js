@@ -207,6 +207,8 @@
     '.jm, .jm-mega, .jm-drawer { --ink:#0a0a0a; --paper:#fff; --band:#f6f6f6; --rule:#e6e6e6; --soft:#6b6b6b; --ease:cubic-bezier(.25,1,.5,1);',
     '  font-family:"Pretendard","Apple SD Gothic Neo",sans-serif; -webkit-font-smoothing:antialiased; word-break:keep-all; }',
     '.jm a, .jm-mega a, .jm-drawer a { color:inherit; text-decoration:none; }',
+    /* 아임웹 기본 링크 hover 색(어두운 색)이 메뉴에 덮이지 않게 */
+    '.jm a:hover, .jm a:focus, .jm a:active, .jm a:visited { color:inherit !important; }',
     '.jm button, .jm-drawer button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; }',
     '.jm ul, .jm-mega ul, .jm-drawer ul { list-style:none; }',
     /* 바 */
@@ -224,7 +226,8 @@
     '@media (min-width:' + BP + 'px){ .jm-bar { padding:0 40px; } }',
     '.jm-solid .jm-bar, .jm.is-on .jm-bar, .jm.is-stuck .jm-bar { background:var(--paper); color:var(--ink); box-shadow:inset 0 -1px 0 var(--rule); }',
     '.jm-left { display:flex; align-items:center; gap:18px; min-width:0; }',
-    '.jm-right { display:flex; align-items:center; justify-content:flex-end; gap:20px; }',
+    '.jm-right { display:flex; align-items:center; justify-content:flex-end; gap:16px; }',
+    '@media (min-width:' + BP + 'px){ .jm-right { gap:20px; } }',
     '.jm-logo { display:flex; flex-direction:column; align-items:center; line-height:1; }',
     '.jm-logo-en { font-family:"Cormorant Garamond",serif; font-weight:500; font-size:19px; letter-spacing:.3em; padding-left:.3em; }',
     '.jm-logo-ko { font-size:8px; letter-spacing:.6em; padding-left:.6em; margin-top:6px; opacity:.72; }',
@@ -242,10 +245,14 @@
     '.jm-nav > a::after { content:""; position:absolute; left:0; right:0; bottom:2px; height:1px; background:currentColor;',
     '  transform:scaleX(0); transform-origin:left; transition:transform .45s var(--ease); }',
     '.jm-nav > a:hover::after, .jm-nav > a.is-on::after, .jm-nav > a.is-current::after { transform:scaleX(1); }',
-    '.jm-tel, .jm-icon { display:none; font-size:13px; white-space:nowrap; }',
-    '@media (min-width:' + BP + 'px){ .jm-icon { display:inline-flex; align-items:center; } }',
+    '.jm-tel { display:none; font-size:13px; white-space:nowrap; }',
+    '.jm-icon { display:inline-flex; align-items:center; }', /* 인스타그램: 모바일에서도 표시 */
     '@media (min-width:1360px){ .jm-tel { display:inline-flex; align-items:center; } }',
-    '.jm-icon svg { width:18px; height:18px; }',
+    '.jm-icon svg { width:20px; height:20px; }',
+    '@media (min-width:' + BP + 'px){ .jm-icon svg { width:18px; height:18px; } }',
+    /* 오른쪽 링크 hover: 색은 그대로, 살짝 투명하게 */
+    '.jm-tel, .jm-icon, .jm-book { transition:opacity .25s ease; }',
+    '.jm-tel:hover, .jm-icon:hover, .jm-book:hover { opacity:.7; }',
     '.jm-book { font-size:13px; white-space:nowrap; padding-bottom:2px; border-bottom:1px solid currentColor; }',
     '.jm-book-l { display:none; } @media (min-width:640px){ .jm-book-s { display:none; } .jm-book-l { display:inline; } }',
     '.jm-burger { position:relative; width:22px; height:16px; display:block; }',
