@@ -48,7 +48,8 @@
      mobileOpenAll: true → 모바일 메뉴에서 하위 칸을 전부 펼쳐서 보여줌 (없으면 첫 칸만 펼침)
      mobileCols: 2 → 제목 없는 칸('')을 모바일에서도 PC처럼 옆에 나란히 보여줌
      cards의 imgMobile → 모바일 메뉴에서만 쓰는 사진 (없으면 img를 그대로 씀)
-     cards의 sub → 카드 제목 위에 들어가는 작은 문구 (선택) */
+     cards의 sub → 카드 제목 위에 들어가는 작은 문구 (선택)
+     cards의 hrefMobile → 모바일 메뉴에서만 쓰는 연결 주소 (없으면 href를 그대로 씀) */
   var MENU = [
     {
       key: 'about', label: 'About', href: 'https://jshwedding.com/company',
@@ -130,7 +131,8 @@
       cards: [
         { img: IMG + 'menu_studio.webp', title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
-          title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4' }
+          title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4',
+          hrefMobile: 'https://jshwedding.com/studio_preview#s2025011173ea8b20ba82a' /* 모바일 메뉴용 (아임웹 모바일 섹션 주소) */ }
       ]
     },
     {
@@ -434,7 +436,7 @@
           esc(title) + '<i class="jm-pm"></i></button><div class="jm-sec-b"><div>' + body + '</div></div></div>';
       }).join('');
       var cards = (m.cards || []).map(function (c) {
-        return a(c.href, '<img loading="lazy" src="' + esc(c.imgMobile || c.img) + '" alt=""><span class="jm-card-t">' + (c.sub ? '<em>' + esc(c.sub) + '</em>' : '') + '<b>' + esc(c.title) + '</b><span>' + esc(c.label || 'DISCOVER') + '</span></span>', 'jm-card', c.blank);
+        return a(c.hrefMobile || c.href, '<img loading="lazy" src="' + esc(c.imgMobile || c.img) + '" alt=""><span class="jm-card-t">' + (c.sub ? '<em>' + esc(c.sub) + '</em>' : '') + '<b>' + esc(c.title) + '</b><span>' + esc(c.label || 'DISCOVER') + '</span></span>', 'jm-card', c.blank);
       }).join('');
       return '<div class="jm-view jm-vsub" data-view="' + esc(m.key) + '">' +
         '<div class="jm-shead"><button class="jm-back" type="button" aria-label="뒤로"><i></i></button><b>' + esc(m.label) + '</b><span></span></div>' +
