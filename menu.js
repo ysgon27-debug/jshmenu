@@ -389,7 +389,7 @@
       '<div class="jm-right">' +
         a('tel:' + SITE.tel, esc(SITE.telLabel), 'jm-tel') +
         '<a class="jm-icon" href="' + esc(SITE.instagram) + '" target="_blank" rel="noopener" aria-label="인스타그램">' + IG_SVG + '</a>' +
-        a(SITE.reservation, '<span class="jm-book-l">Book Appointment</span><span class="jm-book-s">예약</span>', 'jm-book') +
+        a(SITE.reservation, '<span class="jm-book-l">Reservation</span><span class="jm-book-s">예약</span>', 'jm-book') +
       '</div></div>';
   }
 
@@ -454,7 +454,7 @@
           '<div class="jm-soc">' + a(SITE.instagram, 'INSTAGRAM', '', true) + a(SITE.blog, 'BLOG', '', true) + a(SITE.cafe, 'CAFE', '', true) + '</div></div>' +
         '</div>' + subs +
       '</div>' +
-      '<div class="jm-dfoot">' + a(SITE.reservation, 'BOOK APPOINTMENT', 'jm-dcta') + '</div>';
+      '<div class="jm-dfoot">' + a(SITE.reservation, 'RESERVATION', 'jm-dcta') + '</div>';
   }
 
   /* ── 동작 ── */
