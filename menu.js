@@ -65,8 +65,8 @@
         ], links: [['063.231.7722', 'tel:063-231-7722']] }
       ],
       cards: [
-        { img: IMG + 'menu_about.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
-        { img: IMG + 'menu_book_now.webp', title: 'Private Appointment', label: 'BOOK NOW', href: 'https://jshwedding.com/reservation' }
+        { img: IMG + 'menu_thebrand.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
+        { img: IMG + 'menu_location.webp', title: 'Location', label: 'VISIT US', href: 'https://jshwedding.com/location' }
       ]
     },
     {
