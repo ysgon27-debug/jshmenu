@@ -192,6 +192,9 @@
   /* ═══════════════ ✏️ 여기까지 ═══════════════ */
 
   var BP = 1280; /* 이 폭 이상에서 PC 메가 메뉴, 미만은 전체 화면 메뉴 */
+  /* PC 메가 메뉴 조건: 폭 1280px 이상 + 마우스 사용 기기
+     (태블릿·폰처럼 터치 기기는 가로로 봐도 삼선(햄버거) 메뉴) */
+  var DESK = '(min-width:' + BP + 'px) and (hover:hover) and (pointer:fine)';
 
   /* ── 폰트 ── */
   function addLink(href) {
@@ -215,7 +218,7 @@
     '.jm ul, .jm-mega ul, .jm-drawer ul { list-style:none; }',
     /* 바 */
     '.jm { --hh:64px; position:relative; z-index:9000; width:100%; }',
-    '@media (min-width:' + BP + 'px){ .jm { --hh:84px; } }',
+    '@media ' + DESK + '{ .jm { --hh:84px; } }',
     '.jm-transparent { position:absolute; top:0; left:0; right:0; }',
     '.jm.is-fixed { position:fixed; top:0; left:0; right:0; }',
     /* 기존 히어로 위에 띄울 때: 밝은 사진에서도 흰 메뉴가 읽히도록 상단만 살짝 어둡게 */
@@ -225,23 +228,23 @@
     '.jm-bar { position:relative; z-index:0; height:var(--hh); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 16px;',
     '  color:#fff; border:0; box-shadow:none; transition:background-color .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease); }',
     '@media (min-width:640px){ .jm-bar { padding:0 28px; } }',
-    '@media (min-width:' + BP + 'px){ .jm-bar { padding:0 40px; } }',
+    '@media ' + DESK + '{ .jm-bar { padding:0 40px; } }',
     '.jm-solid .jm-bar, .jm.is-on .jm-bar, .jm.is-stuck .jm-bar { background:var(--paper); color:var(--ink); box-shadow:inset 0 -1px 0 var(--rule); }',
     '.jm-left { display:flex; align-items:center; gap:18px; min-width:0; }',
     '.jm-right { display:flex; align-items:center; justify-content:flex-end; gap:16px; }',
-    '@media (min-width:' + BP + 'px){ .jm-right { gap:20px; } }',
+    '@media ' + DESK + '{ .jm-right { gap:20px; } }',
     '.jm-logo { display:flex; flex-direction:column; align-items:center; line-height:1; }',
     '.jm-logo-en { font-family:"Cormorant Garamond",serif; font-weight:500; font-size:19px; letter-spacing:.3em; padding-left:.3em; }',
     '.jm-logo-ko { font-size:8px; letter-spacing:.6em; padding-left:.6em; margin-top:6px; opacity:.72; }',
-    '@media (min-width:' + BP + 'px){ .jm-logo-en { font-size:21px; letter-spacing:.24em; padding-left:.24em; } .jm-logo-ko { font-size:9px; } }',
+    '@media ' + DESK + '{ .jm-logo-en { font-size:21px; letter-spacing:.24em; padding-left:.24em; } .jm-logo-ko { font-size:9px; } }',
     '.jm-logo img { display:block; height:30px; width:auto; }',
-    '@media (min-width:' + BP + 'px){ .jm-logo img { height:40px; } }',
+    '@media ' + DESK + '{ .jm-logo img { height:40px; } }',
     '.jm-dtop .jm-logo img { height:30px; }',
     '.jm-logo .jm-li-b { display:none; }',
     '.jm-solid .jm-logo .jm-li-w, .jm.is-on .jm-logo .jm-li-w, .jm.is-stuck .jm-logo .jm-li-w { display:none; }',
     '.jm-solid .jm-logo .jm-li-b, .jm.is-on .jm-logo .jm-li-b, .jm.is-stuck .jm-logo .jm-li-b { display:block; }',
     '.jm-nav { display:none; gap:20px; }',
-    '@media (min-width:' + BP + 'px){ .jm-nav { display:flex; } }',
+    '@media ' + DESK + '{ .jm-nav { display:flex; } }',
     '@media (min-width:1440px){ .jm-nav { gap:28px; } }',
     '.jm-nav > a { position:relative; font-size:13px; letter-spacing:.02em; white-space:nowrap; padding:8px 0; }',
     '.jm-nav > a::after { content:""; position:absolute; left:0; right:0; bottom:2px; height:1px; background:currentColor;',
@@ -249,23 +252,23 @@
     '.jm-nav > a:hover::after, .jm-nav > a.is-on::after, .jm-nav > a.is-current::after { transform:scaleX(1); }',
     '.jm-tel { display:none; font-size:13px; white-space:nowrap; }',
     '.jm-icon { display:inline-flex; align-items:center; }', /* 인스타그램: 모바일에서도 표시 */
-    '@media (min-width:1360px){ .jm-tel { display:inline-flex; align-items:center; } }',
+    '@media (min-width:1360px) and (hover:hover) and (pointer:fine){ .jm-tel { display:inline-flex; align-items:center; } }',
     '.jm-icon svg { width:20px; height:20px; }',
-    '@media (min-width:' + BP + 'px){ .jm-icon svg { width:18px; height:18px; } }',
+    '@media ' + DESK + '{ .jm-icon svg { width:18px; height:18px; } }',
     /* 오른쪽 링크 hover: 색은 그대로, 살짝 투명하게 */
     '.jm-tel, .jm-icon, .jm-book { transition:opacity .25s ease; }',
     '.jm-tel:hover, .jm-icon:hover, .jm-book:hover { opacity:.7; }',
     '.jm-book { font-size:13px; white-space:nowrap; padding-bottom:2px; border-bottom:1px solid currentColor; }',
     '.jm-book-l { display:none; } @media (min-width:640px){ .jm-book-s { display:none; } .jm-book-l { display:inline; } }',
     '.jm-burger { position:relative; width:22px; height:16px; display:block; }',
-    '@media (min-width:' + BP + 'px){ .jm-burger { display:none; } }',
+    '@media ' + DESK + '{ .jm-burger { display:none; } }',
     '.jm-burger i { position:absolute; left:0; right:0; height:2px; background:currentColor; }',
     '.jm-burger i:nth-child(1){ top:1px; } .jm-burger i:nth-child(2){ top:7px; } .jm-burger i:nth-child(3){ top:13px; }',
     /* 메가 메뉴: 화면 기준(fixed)으로 띄워 아임웹 섹션에 잘리지 않게 */
     '.jm-mega { position:fixed; left:0; right:0; top:84px; z-index:8999; height:0; overflow:hidden; background:var(--paper); color:var(--ink);',
     '  border:0; visibility:hidden; transition:height .55s var(--ease), visibility 0s .55s; }',
     '.jm-mega.is-open { visibility:visible; transition:height .55s var(--ease), visibility 0s; }',
-    '@media (max-width:' + (BP - 1) + 'px){ .jm-mega { display:none; } }',
+    '@media not all and (min-width:' + BP + 'px) and (hover:hover) and (pointer:fine){ .jm-mega { display:none; } }',
     '.jm-pane { position:absolute; top:0; left:0; right:0; opacity:0; visibility:hidden; transform:translateY(-8px);',
     '  transition:opacity .3s ease, transform .45s var(--ease), visibility 0s .3s; }',
     '.jm-pane.is-on { position:relative; opacity:1; visibility:visible; transform:none;',
@@ -301,7 +304,7 @@
     '.jm-drawer { position:fixed; inset:0; z-index:2147483000; background:var(--paper); color:var(--ink); display:flex; flex-direction:column;',
     '  transform:translateX(-100%); visibility:hidden; transition:transform .55s var(--ease), visibility 0s .55s; }',
     '.jm-drawer.is-on { transform:none; visibility:visible; transition:transform .55s var(--ease), visibility 0s; }',
-    '@media (min-width:' + BP + 'px){ .jm-drawer { display:none; } }',
+    '@media ' + DESK + '{ .jm-drawer { display:none; } }',
     '.jm-dtop { flex-shrink:0; height:64px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 18px; border-bottom:1px solid var(--rule); }',
     '.jm-dtop .jm-book { justify-self:end; font-size:14px; }',
     '.jm-dtop .jm-logo .jm-li-w { display:none; } .jm-dtop .jm-logo .jm-li-b { display:block; }',
@@ -487,7 +490,7 @@
     var panes = {};
     mega.querySelectorAll('.jm-pane').forEach(function (p) { panes[p.getAttribute('data-pane')] = p; });
     var current = null, closeT = null;
-    var desk = window.matchMedia('(min-width:' + BP + 'px)');
+    var desk = window.matchMedia(DESK);
     var noHover = window.matchMedia('(hover: none)');
 
     function place() { mega.style.top = Math.max(0, head.getBoundingClientRect().bottom) + 'px'; }
@@ -625,7 +628,7 @@
     });
   }
 
-    function mountAll() {
+  function mountAll() {
     Array.prototype.forEach.call(
       document.querySelectorAll('#jsh-menu, [data-jsh-menu]'), mount
     );
