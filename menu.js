@@ -625,10 +625,23 @@
     });
   }
 
-  function mountAll() {
-    document.querySelectorAll('#jsh-menu, [data-jsh-menu]').forEach(mount);
+    function mountAll() {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('#jsh-menu, [data-jsh-menu]'), mount
+    );
   }
   window.__jshMenu = { mountAll: mountAll };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAll);
-  else mountAll();
+
+  /* 페이지 해석 중에도 #jsh-menu가 나타나는 즉시 메뉴를 그림 */
+  mountAll();
+  if (document.readyState === 'loading' && window.MutationObserver) {
+    var jmObs = new MutationObserver(mountAll);
+    jmObs.observe(document.documentElement, { childList: true, subtree: true });
+    document.addEventListener('DOMContentLoaded', function () {
+      mountAll();
+      jmObs.disconnect();
+    });
+  } else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountAll);
+  }
 })();
