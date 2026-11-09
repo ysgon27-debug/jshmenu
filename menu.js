@@ -135,9 +135,7 @@
         ]}
       ],
       cards: [
-        { img: VID + 'menu_studio_poster.webp', /* 영상 첫 장면 (사진→영상 전환이 이어지게) */
-          video: VID + 'menu_studio.mp4', /* PC 메가 메뉴 hover 시 재생 */
-          title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
+        { img: IMG + 'menu_studio.webp', title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
           title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4',
           hrefMobile: 'https://jshwedding.com/studio_preview#s2025011173ea8b20ba82a' /* 모바일 메뉴용 (아임웹 모바일 섹션 주소) */ }
