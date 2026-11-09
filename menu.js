@@ -49,7 +49,10 @@
      mobileCols: 2 → 제목 없는 칸('')을 모바일에서도 PC처럼 옆에 나란히 보여줌
      cards의 imgMobile → 모바일 메뉴에서만 쓰는 사진 (없으면 img를 그대로 씀)
      cards의 sub → 카드 제목 위에 들어가는 작은 문구 (선택)
-     cards의 hrefMobile → 모바일 메뉴에서만 쓰는 연결 주소 (없으면 href를 그대로 씀) */
+     cards의 hrefMobile → 모바일 메뉴에서만 쓰는 연결 주소 (없으면 href를 그대로 씀)
+     cards의 video → PC 메가 메뉴에서 그 메뉴에 마우스를 올리면 카드 안에서 재생되는 영상(mp4)
+                     img는 영상이 뜨기 전 첫 화면 겸 모바일 메뉴용 사진으로 그대로 쓰입니다
+                     권장: 4:5 세로(800×1000), 5~8초 반복, 소리 없음, 3MB 이하 */
   var MENU = [
     {
       key: 'about', label: 'About', href: 'https://jshwedding.com/company',
@@ -65,7 +68,7 @@
         ], links: [['063.231.7722', 'tel:063-231-7722']] }
       ],
       cards: [
-        { img: 'https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu_thebrand_1109.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
+        { img: IMG + 'menu_thebrand.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
         { img: IMG + 'menu_location.webp', title: 'Location', label: 'VISIT US', href: 'https://jshwedding.com/location' }
       ]
     },
@@ -97,7 +100,9 @@
         ]}
       ],
       cards: [
-        { img: IMG + 'menu_dress.webp', title: 'Dress Preview', label: 'DISCOVER', href: 'https://jshwedding.com/dress_preview' },
+        { img: IMG + 'menu_dress.webp',
+          // video: IMG + 'menu_dress.mp4',  // 영상을 jsh 저장소에 올린 뒤 맨 앞 // 를 지우면 적용
+          title: 'Dress Preview', label: 'DISCOVER', href: 'https://jshwedding.com/dress_preview' },
         { img: IMG + 'menu_trunkshow.webp', title: 'Trunk Show', label: 'DISCOVER', href: 'https://jshwedding.com/magazine/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=169872357&t=board' }
       ]
     },
@@ -129,7 +134,9 @@
         ]}
       ],
       cards: [
-        { img: IMG + 'menu_studio.webp', title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
+        { img: IMG + 'menu_studio.webp',
+          video: IMG + 'menu_studio.mp4', /* PC 메가 메뉴 hover 시 재생 (4:5, 소리 없음) */
+          title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
           title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4',
           hrefMobile: 'https://jshwedding.com/studio_preview#s2025011173ea8b20ba82a' /* 모바일 메뉴용 (아임웹 모바일 섹션 주소) */ }
@@ -293,6 +300,11 @@
     '@media (min-width:1360px){ .jm-card { width:272px; } }',
     '.jm-card img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s var(--ease); }',
     '.jm-card:hover img { transform:scale(1.05); }',
+    /* 카드 영상: 재생이 시작되면 사진 위로 부드럽게 나타남 */
+    '.jm-card-v { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; opacity:0;',
+    '  transition:opacity .7s ease, transform 1.2s var(--ease); }',
+    '.jm-card-v.is-play { opacity:1; }',
+    '.jm-card:hover .jm-card-v { transform:scale(1.05); }',
     '.jm-card::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.5), rgba(0,0,0,0) 46%); }',
     '.jm-card-t { position:absolute; left:0; right:0; bottom:26px; z-index:1; text-align:center; }',
     '.jm-card-t em { display:block; font-style:normal; font-size:12px; line-height:1.5; letter-spacing:.02em; opacity:.9; margin:0 14px 8px; word-break:keep-all; }',
@@ -404,7 +416,10 @@
         return '<div class="jm-col"><h4>' + esc(c.title || '') + '</h4><ul>' + items + '</ul></div>';
       }).join('');
       var cards = (m.cards || []).map(function (c) {
-        return a(c.href, '<img loading="lazy" src="' + esc(c.img) + '" alt=""><span class="jm-card-t">' + (c.sub ? '<em>' + esc(c.sub) + '</em>' : '') + '<b>' + esc(c.title) + '</b><span>' + esc(c.label || 'DISCOVER') + '</span></span>', 'jm-card', c.blank);
+        var vid = c.video
+          ? '<video class="jm-card-v" muted loop playsinline preload="none" aria-hidden="true" data-src="' + esc(c.video) + '"></video>'
+          : '';
+        return a(c.href, '<img loading="lazy" src="' + esc(c.img) + '" alt="">' + vid + '<span class="jm-card-t">' + (c.sub ? '<em>' + esc(c.sub) + '</em>' : '') + '<b>' + esc(c.title) + '</b><span>' + esc(c.label || 'DISCOVER') + '</span></span>', 'jm-card', c.blank);
       }).join('');
       return '<div class="jm-pane" data-pane="' + esc(m.key) + '">' +
         '<div class="jm-band"><div class="jm-band-t"><b>' + esc(m.label.toUpperCase()) + '</b><span>' + esc(m.band || '') + '</span></div>' +
@@ -494,6 +509,26 @@
     var noHover = window.matchMedia('(hover: none)');
 
     function place() { mega.style.top = Math.max(0, head.getBoundingClientRect().bottom) + 'px'; }
+
+    /* 카드 영상: 열린 패널의 영상만 재생, 나머지는 멈춤
+       영상 파일은 처음 열릴 때 불러오므로 페이지 로딩 속도에 영향 없음 */
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    mega.querySelectorAll('.jm-card-v').forEach(function (v) {
+      v.addEventListener('playing', function () { v.classList.add('is-play'); });
+      v.addEventListener('error', function () { v.classList.remove('is-play'); }, true);
+    });
+    function syncVideos(key) {
+      Object.keys(panes).forEach(function (k) {
+        panes[k].querySelectorAll('.jm-card-v').forEach(function (v) {
+          if (k === key && !calm.matches) {
+            if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); v.load(); }
+            var p = v.play(); if (p && p.catch) p.catch(function () {});
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      });
+    }
     function openPane(key) {
       clearTimeout(closeT);
       var pane = panes[key];
@@ -503,6 +538,7 @@
       if (current !== key) {
         Object.keys(panes).forEach(function (k) { panes[k].classList.toggle('is-on', k === key); });
         current = key;
+        syncVideos(key);
       }
       head.classList.add('is-on'); dim.classList.add('is-on'); mega.classList.add('is-open');
       mega.setAttribute('aria-hidden', 'false');
@@ -516,6 +552,7 @@
       mega.setAttribute('aria-hidden', 'true');
       links.forEach(function (l) { l.classList.remove('is-on'); });
       current = null;
+      syncVideos(null);
       setTimeout(function () { if (!current) Object.keys(panes).forEach(function (k) { panes[k].classList.remove('is-on'); }); }, 550);
     }
     function later() { closeT = setTimeout(closeMega, 160); }
