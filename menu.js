@@ -27,6 +27,8 @@
 
   /* ═══════════════ ✏️ 여기만 고치면 됩니다 ═══════════════ */
   var IMG = 'https://cdn.jsdelivr.net/gh/ysgon27-debug/jsh@main/';
+  /* 메뉴 영상: jshmenu 저장소(GitHub Pages) — 같은 이름으로 다시 올려도 몇 분 안에 반영 */
+  var VID = 'https://ysgon27-debug.github.io/jshmenu/';
   var SITE = {
     logoEn: 'JEONSOOHYUN',
     logoKo: 'WEDDING',
@@ -52,7 +54,8 @@
      cards의 hrefMobile → 모바일 메뉴에서만 쓰는 연결 주소 (없으면 href를 그대로 씀)
      cards의 video → PC 메가 메뉴에서 그 메뉴에 마우스를 올리면 카드 안에서 재생되는 영상(mp4)
                      img는 영상이 뜨기 전 첫 화면 겸 모바일 메뉴용 사진으로 그대로 쓰입니다
-                     권장: 4:5 세로(800×1000), 5~8초 반복, 소리 없음, 3MB 이하 */
+                     권장: 4:5 세로(800×1000), 5~8초 반복, 소리 없음, 3MB 이하
+                     영상은 jshmenu 저장소에 올리고 VID + '파일이름.mp4' 로 적습니다 */
   var MENU = [
     {
       key: 'about', label: 'About', href: 'https://jshwedding.com/company',
@@ -68,7 +71,7 @@
         ], links: [['063.231.7722', 'tel:063-231-7722']] }
       ],
       cards: [
-        { img: IMG + 'menu_thebrand.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
+        { img: 'https://cdn.jsdelivr.net/gh/ysgon27-debug/jshmenu@main/menu_thebrand_1109.webp', title: 'The Brand', label: 'DISCOVER', href: 'https://jshwedding.com/thebrand' },
         { img: IMG + 'menu_location.webp', title: 'Location', label: 'VISIT US', href: 'https://jshwedding.com/location' }
       ]
     },
@@ -100,9 +103,7 @@
         ]}
       ],
       cards: [
-        { img: IMG + 'menu_dress.webp',
-          // video: IMG + 'menu_dress.mp4',  // 영상을 jsh 저장소에 올린 뒤 맨 앞 // 를 지우면 적용
-          title: 'Dress Preview', label: 'DISCOVER', href: 'https://jshwedding.com/dress_preview' },
+        { img: IMG + 'menu_dress.webp', title: 'Dress Preview', label: 'DISCOVER', href: 'https://jshwedding.com/dress_preview' },
         { img: IMG + 'menu_trunkshow.webp', title: 'Trunk Show', label: 'DISCOVER', href: 'https://jshwedding.com/magazine/?q=YToxOntzOjEyOiJrZXl3b3JkX3R5cGUiO3M6MzoiYWxsIjt9&bmode=view&idx=169872357&t=board' }
       ]
     },
@@ -135,7 +136,7 @@
       ],
       cards: [
         { img: IMG + 'menu_studio.webp',
-          video: IMG + 'menu_studio.mp4', /* PC 메가 메뉴 hover 시 재생 (4:5, 소리 없음) */
+          video: VID + 'menu_studio.mp4', /* PC 메가 메뉴 hover 시 재생 */
           title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
           title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4',
