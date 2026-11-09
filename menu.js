@@ -135,7 +135,7 @@
         ]}
       ],
       cards: [
-        { img: IMG + 'menu_studio.webp',
+        { img: VID + 'menu_studio_poster.webp', /* 영상 첫 장면 (사진→영상 전환이 이어지게) */
           video: VID + 'menu_studio.mp4', /* PC 메가 메뉴 hover 시 재생 */
           title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
@@ -517,6 +517,15 @@
     mega.querySelectorAll('.jm-card-v').forEach(function (v) {
       v.addEventListener('playing', function () { v.classList.add('is-play'); });
       v.addEventListener('error', function () { v.classList.remove('is-play'); }, true);
+    });
+    /* 메뉴 바에 마우스가 들어오면 영상을 미리 받아 둠 → 패널을 열 때 바로 재생 */
+    var warmed = false;
+    head.addEventListener('mouseenter', function () {
+      if (warmed || !desk.matches || calm.matches) return;
+      warmed = true;
+      mega.querySelectorAll('.jm-card-v').forEach(function (v) {
+        if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = v.getAttribute('data-src'); v.load(); }
+      });
     });
     function syncVideos(key) {
       Object.keys(panes).forEach(function (k) {
