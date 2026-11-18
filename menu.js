@@ -137,8 +137,30 @@
       cards: [
         { img: IMG + 'menu_studio.webp', title: 'Studio Preview', label: 'DISCOVER', href: 'https://jshwedding.com/studio_preview' },
         { img: IMG + 'menu_studio_photographer.webp', sub: '감동을 포착하는 렌즈의 마에스트로', /* sub: 제목 위 작은 문구 (없으면 생략) */
-          title: 'Photographer', label: 'MEET THE ARTIST', href: 'https://jshwedding.com/studio_preview#s20250213ab3713ae24ea4',
-          hrefMobile: 'https://jshwedding.com/studio_preview#s2025011173ea8b20ba82a' /* 모바일 메뉴용 (아임웹 모바일 섹션 주소) */ }
+          title: 'Photographer Crew', label: 'MEET THE CREW', href: 'https://jshwedding.com/photographer' }
+      ]
+    },
+    {
+      key: 'photographer', label: 'Photographer', href: 'https://jshwedding.com/photographer',
+      mobileCols: 2, /* 모바일에서도 이름을 2열로 */
+      band: '6인의 작가와 셀렉터, 전수현웨딩 포토그래퍼 크루',
+      cols: [
+        { title: 'PHOTOGRAPHER CREW', links: [
+          ['이승재 부장', 'https://jshwedding.com/photographer'],
+          ['윤광진 실장', 'https://jshwedding.com/photographer'],
+          ['나원균 실장', 'https://jshwedding.com/photographer'],
+          ['이선정 실장', 'https://jshwedding.com/photographer']
+        ]},
+        { title: '', links: [
+          ['장우영 실장', 'https://jshwedding.com/photographer'],
+          ['최재명 실장', 'https://jshwedding.com/photographer'],
+          ['고요한 실장', 'https://jshwedding.com/photographer']
+        ]}
+      ],
+      cards: [
+        { img: IMG + 'photographer_hero_mo.webp', /* PC용 세로 */
+          imgMobile: IMG + 'photographer_hero.webp', /* 모바일용 가로 */
+          title: 'Photographer Crew', label: 'MEET THE CREW', href: 'https://jshwedding.com/photographer' }
       ]
     },
     {
@@ -249,10 +271,13 @@
     '.jm-logo .jm-li-b { display:none; }',
     '.jm-solid .jm-logo .jm-li-w, .jm.is-on .jm-logo .jm-li-w, .jm.is-stuck .jm-logo .jm-li-w { display:none; }',
     '.jm-solid .jm-logo .jm-li-b, .jm.is-on .jm-logo .jm-li-b, .jm.is-stuck .jm-logo .jm-li-b { display:block; }',
-    '.jm-nav { display:none; gap:20px; }',
+    '.jm-nav { display:none; gap:12px; }',
     '@media ' + DESK + '{ .jm-nav { display:flex; } }',
-    '@media (min-width:1440px){ .jm-nav { gap:28px; } }',
+    '@media (min-width:1440px){ .jm-nav { gap:20px; } }',
+    '@media (min-width:1600px){ .jm-nav { gap:28px; } }',
     '.jm-nav > a { position:relative; font-size:13px; letter-spacing:.02em; white-space:nowrap; padding:8px 0; }',
+    /* 메뉴 8개: 1280~1439px 화면에서는 글자·간격을 살짝 줄여 로고와 겹치지 않게 */
+    '@media (max-width:1439px){ .jm-nav > a { font-size:12px; } }',
     '.jm-nav > a::after { content:""; position:absolute; left:0; right:0; bottom:2px; height:1px; background:currentColor;',
     '  transform:scaleX(0); transform-origin:left; transition:transform .45s var(--ease); }',
     '.jm-nav > a:hover::after, .jm-nav > a.is-on::after, .jm-nav > a.is-current::after { transform:scaleX(1); }',
